@@ -1,6 +1,8 @@
 package no.webstep.fagweekend;
 
-import java.net.URI;
+import java.net.URL;
+
+import javax.validation.constraints.NotNull;
 
 import io.dropwizard.Configuration;
 
@@ -11,8 +13,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class TimelineConfiguration extends Configuration {
 
 	@JsonProperty
-	@NotEmpty
-	URI apiUrl;
+	@NotNull
+	URL apiUrl;
 	
 	@JsonProperty
 	@NotEmpty
