@@ -1,0 +1,24 @@
+{
+  "userId" : "jdoe@webstep.no",
+  "fullName" : "J. Doe",
+  "timeline" : [
+    {
+      "label" : "Project X",
+      "start" : "2013-02-01",
+      "end" : "2013-09-01",
+      "image" : "http://www.gameclassification.com/files/games/Project-X.png",
+      "data" : {
+        "Foo" : "Bar"
+      }
+    },
+    {
+      "label" : "SkunkWorks",
+      "start": "2013-11-01",
+      "end": null,
+      "image": "http://www.planobrazil.com/wp-content/uploads/2013/07/Lockheed-Martin-Skunk-Works.jpg",
+      "data": {
+        "Foo" : "Bar"
+      }
+    }
+  ]
+}
