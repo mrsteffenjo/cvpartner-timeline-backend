@@ -12,6 +12,15 @@
       }
     },
     {
+        "label" : "Project Y",
+        "start" : "2013-10-01",
+        "end" : "2013-11-01",
+        "image" : "http://www.gameclassification.com/files/games/Project-X.png",
+        "data" : {
+          "Bar" : "Foo"
+        }
+    },
+    {
       "label" : "SkunkWorks",
       "start": "2013-11-01",
       "end": null,
