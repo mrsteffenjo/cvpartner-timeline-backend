@@ -21,7 +21,11 @@ public class TimelineApplication extends Application<TimelineConfiguration> {
 
 	@Override
 	public void run(TimelineConfiguration configuration, Environment environment) {
-		// nothing to do yet
+		final TimelineResource resource = new TimelineResource(
+		        configuration.apiUrl,
+		        configuration.token
+		    );
+		    environment.jersey().register(resource);
 	}
 
 }

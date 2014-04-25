@@ -12,10 +12,10 @@ public class TimelineConfiguration extends Configuration {
 
 	@JsonProperty
 	@NotEmpty
-	private URI apiUrl;
+	URI apiUrl;
 	
 	@JsonProperty
 	@NotEmpty
-	private String token;
-
+	String token;
+	
 }
