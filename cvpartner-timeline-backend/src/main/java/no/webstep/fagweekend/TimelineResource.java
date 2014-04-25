@@ -1,7 +1,12 @@
 package no.webstep.fagweekend;
 
-import com.google.common.base.Optional;
-import com.codahale.metrics.annotation.Timed;
+import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,34 +17,24 @@ import javax.ws.rs.core.MediaType;
 import no.webstep.fagweekend.model.client.Segment;
 import no.webstep.fagweekend.model.client.Timeline;
 
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import com.codahale.metrics.annotation.Timed;
+import com.google.common.base.Optional;
 
 @Path("/timeline")
 @Produces(MediaType.APPLICATION_JSON)
 public class TimelineResource {
-    private final URL apiUrl;
-    private final String token;
-    private final AtomicLong counter;
 
-    public TimelineResource(URL apiUrl, String token) {
-        this.apiUrl = apiUrl;
-        this.token = token;
-        this.counter = new AtomicLong();
+    private final CvPartnerClient cvPartnerClient;
+
+    public TimelineResource(CvPartnerClient cvPartnerClient) {
+        this.cvPartnerClient = cvPartnerClient;
     }
 
     @GET
     @Timed
-    public Timeline sayHello(@QueryParam("user") Optional<String> user) {
-        counter.incrementAndGet();
+    public Timeline sayHello(@QueryParam("user") Optional<String> user) throws URISyntaxException {
+        Object user2 = cvPartnerClient.findUser(user.get());
         SimpleDateFormat df = new SimpleDateFormat("YYYY-mm-ddS");
-        
         
         Segment s1 = new Segment();
         s1.label = "Project X";

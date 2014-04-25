@@ -1,2 +1,6 @@
-apiUrl: https://webstep.cvpartner.no/api/v1
+apiUrl: https://webstep.cvpartner.no/api/v1/
 token: f09f811d4e03d21fe802109e4575a864
+
+jerseyClient:
+  timeout: 20s
+  connectionTimeout: 20s
