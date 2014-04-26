@@ -1,5 +1,8 @@
 package no.webstep.fagweekend.cvpartner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Qualification {
 	public String _id;
 	public Boolean disabled;
