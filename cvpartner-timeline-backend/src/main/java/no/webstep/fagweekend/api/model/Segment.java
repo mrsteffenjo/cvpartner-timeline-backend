@@ -1,4 +1,4 @@
-package no.webstep.fagweekend.model.client;
+package no.webstep.fagweekend.api.model;
 
 import java.util.Date;
 import java.util.Map;

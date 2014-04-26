@@ -2,13 +2,13 @@ package no.webstep.fagweekend;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
+import no.webstep.fagweekend.cvpartner.model.Cv;
+import no.webstep.fagweekend.cvpartner.model.User;
+
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
 
 public class CvPartnerClient {
@@ -22,22 +22,19 @@ public class CvPartnerClient {
         this.config = config;
     }
 
-    Object userTimeline(String emailAddress) throws URISyntaxException {
-        Object user = findUser(emailAddress);
-        return null;
+    User userTimeline(String emailAddress) throws URISyntaxException {
+        User user = findUser(emailAddress);
+        return user;
     }
     
-    Map<String, Object> findUser(String emailAddress) throws URISyntaxException {
+    User findUser(String emailAddress) throws URISyntaxException {
         URI baseUri = config.apiUrl.toURI();
         URI usersUri = baseUri.resolve("users");
-        Builder get = client.resource(usersUri)
-              .accept(MediaType.APPLICATION_JSON)
-              .header("Authorization", String.format("Token token=\"%s\"", config.token));
-        List<Map<String, Object>> users = get
-              .get(new GenericType(List.class));
+        Builder req = createBuilder(usersUri);
         
-        for (Map<String, Object> user : users) {
-            String userEmail = (String) user.get("emailAddress");
+        User[] usersList = req.get(User[].class);
+        for (User user : usersList) {
+            String userEmail = user.email;
             if (emailAddress.equals(userEmail)) {
                 return user;
             }
@@ -45,5 +42,18 @@ public class CvPartnerClient {
         
         return null;
     }
-
+    
+    Cv findUserCv(String userId, String cvId) throws URISyntaxException{
+    	URI baseUri = config.apiUrl.toURI();
+        URI usersUri = baseUri.resolve("cvs/"+userId+"/"+cvId);
+        Builder req = createBuilder(usersUri);
+        
+        return req.get(Cv.class);
+    }
+    
+    private Builder createBuilder(URI actionUri){
+    	return client.resource(actionUri)
+        .accept(MediaType.APPLICATION_JSON)
+        .header("Authorization", String.format("Token token=\"%s\"", config.token));
+    }
 }
