@@ -18,43 +18,57 @@ public class CvPartnerClient {
 	private final Client client;
 	private final TimelineConfiguration config;
 	private Map<String, User> cachedUsers;
+	private Map<String, Cv> cachedCvs;
 
 	public CvPartnerClient(Client client, TimelineConfiguration config) {
 		super();
 		this.client = client;
 		this.config = config;
 		this.cachedUsers = new HashMap<>();
+		this.cachedCvs = new HashMap<>();
 	}
 
-	User userTimeline(String emailAddress, Boolean reload)
-			throws URISyntaxException {
+	User userTimeline(String emailAddress, Boolean reload) {
 		User user = findUser(emailAddress, reload);
 		return user;
 	}
 
-	User findUser(String emailAddress, Boolean reload)
-			throws URISyntaxException {
+	User findUser(String emailAddress, Boolean reload) {
 		User user = cachedUsers.get(emailAddress);
 		if (user == null || (reload != null && reload)) {
-			URI baseUri = config.apiUrl.toURI();
-			URI usersUri = baseUri.resolve("users");
-			Builder req = createBuilder(usersUri);
+			try {
+				URI baseUri = config.apiUrl.toURI();
+				URI usersUri = baseUri.resolve("users");
+				Builder req = createBuilder(usersUri);
 
-			User[] usersList = req.get(User[].class);
-			for (User newUser : usersList) {
-				cachedUsers.put(newUser.email, newUser);
+				User[] usersList = req.get(User[].class);
+				for (User newUser : usersList) {
+					cachedUsers.put(newUser.email, newUser);
+				}
+				user = cachedUsers.get(emailAddress);
+			} catch (URISyntaxException e) {
+				return null;
 			}
-			user = cachedUsers.get(emailAddress);return user;
 		}
 		return user;
 	}
 
-	Cv findUserCv(String userId, String cvId) throws URISyntaxException {
-		URI baseUri = config.apiUrl.toURI();
-		URI usersUri = baseUri.resolve("cvs/" + userId + "/" + cvId);
-		Builder req = createBuilder(usersUri);
-
-		return req.get(Cv.class);
+	Cv findUserCv(String userId, String cvId, Boolean reload){
+		String key = userId+":"+cvId;
+		Cv cv = cachedCvs.get(key);
+		if (cv == null || (reload != null && reload)) {
+			try {
+				URI baseUri = config.apiUrl.toURI();
+				URI usersUri = baseUri.resolve("cvs/" + userId + "/" + cvId);
+				Builder req = createBuilder(usersUri);
+				cachedCvs.put(key, req.get(Cv.class));
+				cv = cachedCvs.get(key);
+			} catch (URISyntaxException e) {
+				return null;
+			}
+		}
+		
+		return cv;
 	}
 
 	private Builder createBuilder(URI actionUri) {

@@ -1,13 +1,38 @@
 package no.webstep.fagweekend.cvpartner.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectExperience {
+	@JsonProperty
+	public String customer;
+	
+	@JsonProperty
+	public String customer_description;
+	
+	@JsonProperty
+	public String description;
+	
+	@JsonProperty
+	public String industry;
+	
+	@JsonProperty
+	public String month_from;
+	
+	@JsonProperty
+	public String month_to;
+	
+	@JsonProperty
+	public String year_from;
+	
+	@JsonProperty
+	public String year_to;
+	
 	/**
 	"_id": "530f2db12f274fed840004e7",
     "customer": "Telenor",
-    "customer_description": "Telenor Norge er landets største leverandør av tele- og datatjenester. \nVia sitt mobilnett og fastnett leverer de tjenester innen telefoni, bredbånd og kabel-tv til privat- og bedriftskunder over hele landet. \nDe selger også tjenester til andre telekom-operatører.",
+    "customer_description": "Telenor Norge er landets stï¿½rste leverandï¿½r av tele- og datatjenester. \nVia sitt mobilnett og fastnett leverer de tjenester innen telefoni, bredbï¿½nd og kabel-tv til privat- og bedriftskunder over hele landet. \nDe selger ogsï¿½ tjenester til andre telekom-operatï¿½rer.",
     "customer_value_proposition": null,
     "description": "Order Management System",
     "disabled": false,
@@ -27,11 +52,11 @@ public class ProjectExperience {
     "int_year_from": null,
     "int_year_to": null,
     "local_customer": "Telenor",
-    "local_customer_description": "Telenor Norge er landets største leverandør av tele- og datatjenester. \nVia sitt mobilnett og fastnett leverer de tjenester innen telefoni, bredbånd og kabel-tv til privat- og bedriftskunder over hele landet. \nDe selger også tjenester til andre telekom-operatører.",
+    "local_customer_description": "Telenor Norge er landets stï¿½rste leverandï¿½r av tele- og datatjenester. \nVia sitt mobilnett og fastnett leverer de tjenester innen telefoni, bredbï¿½nd og kabel-tv til privat- og bedriftskunder over hele landet. \nDe selger ogsï¿½ tjenester til andre telekom-operatï¿½rer.",
     "local_customer_value_proposition": null,
     "local_description": "Order Management System",
     "local_industry": "Telecom",
-    "local_long_description": "Telenor OMS (Order Management System) er et stort Java Enterprise prosjekt som inkluderer integrasjoner mot 52 unike systemer som skal styres og oppdateres i løp av en ordrebestillings livssyklus.",
+    "local_long_description": "Telenor OMS (Order Management System) er et stort Java Enterprise prosjekt som inkluderer integrasjoner mot 52 unike systemer som skal styres og oppdateres i lï¿½p av en ordrebestillings livssyklus.",
     "local_month_from": null,
     "local_month_to": null,
     "local_related_work_experience_id": "530f2d3b2f274fc3cb0004bf",
@@ -47,7 +72,7 @@ public class ProjectExperience {
     ],
     "local_year_from": "2007",
     "local_year_to": "2008",
-    "long_description": "Telenor OMS (Order Management System) er et stort Java Enterprise prosjekt som inkluderer integrasjoner mot 52 unike systemer som skal styres og oppdateres i løp av en ordrebestillings livssyklus.",
+    "long_description": "Telenor OMS (Order Management System) er et stort Java Enterprise prosjekt som inkluderer integrasjoner mot 52 unike systemer som skal styres og oppdateres i lï¿½p av en ordrebestillings livssyklus.",
     "modifier_id": null,
     "month_from": null,
     "month_to": null,
