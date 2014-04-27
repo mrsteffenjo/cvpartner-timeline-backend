@@ -27,15 +27,22 @@ import com.google.common.base.Optional;
 public class TimelineResource {
 
     private final CvPartnerClient cvPartnerClient;
+    
+    private Map<String,User> cachedUsers;
 
     public TimelineResource(CvPartnerClient cvPartnerClient) {
         this.cvPartnerClient = cvPartnerClient;
+        this.cachedUsers = new HashMap<>();
     }
 
     @GET
     @Timed
-    public Timeline getUserTimeline(@QueryParam("user") Optional<String> id) throws URISyntaxException {
-        User user = cvPartnerClient.findUser(id.get());
+    public Timeline getUserTimeline(@QueryParam("user") Optional<String> id, @QueryParam("reload") Optional<Boolean> reload) throws URISyntaxException {
+    	User user = cachedUsers.get(id.get());
+    	if (user == null || (reload.isPresent() && reload.get())){
+    		user = cvPartnerClient.findUser(id.get(), reload.get());
+    		cachedUsers.put(id.get(), user);
+    	}
         Cv userCv = cvPartnerClient.findUserCv(user.constructId, user.defaultCvId);
         
         
